@@ -104,6 +104,48 @@ Para rodar o serviço basta apenas rodar o comando:
 docker-compose up
 ```
 
+## Criando a estrutura do banco de dados
+É utilizado um sistema de migrations para mantermos o banco de dados sempre atualizado:
+
+Obs: Para rodar os comandos listados abaixo, é necessário a criação prévia da base de dados que terá o mesmo nome da variável DB_NAME encontrada no .env.
+
+```bash
+docker exec -it role npm run migration
+
+OU
+
+docker exec -it role npx sequelize-cli db:migrate
+
+# Esse comando irá rodar as migrations criando as tabelas no seu banco da dados.
+```
+Caso seja necessário remover a última migration, pode ser usado esse comando:
+
+```bash
+docker exec -it role npm run shred 
+
+OU
+
+docker exec -it role npx sequelize-cli db:migrate:undo
+
+# Esse comando irá remover a última migration criada.
+```
+
+
+## Populando o banco de dados
+É utilizado um sistema de seed para popular o banco de dados:
+
+Obs: Para rodar os comandos listados abaixo, é necessário a criação prévia da base de dados que terá o mesmo nome da variável DB_NAME encontrada no .env.
+
+```bash
+docker exec -it role npm run seed
+
+OU
+
+docker exec -it role npx sequelize-cli db:seed:all
+
+# Esse comando irá rodar as seeds populando as tabelas no seu banco da dados com os dados iniciais.
+```
+
 <!-- ## Criando banco de dados
 
 É utilizado um sistema de migrations para mantermos o banco de dados sempre atualizado:
