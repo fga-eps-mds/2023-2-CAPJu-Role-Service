@@ -1,4 +1,4 @@
-version: "3.3"
+version: '3.3'
 
 services:
   role:
@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     container_name: role
-    entrypoint: ["/bin/sh", "-c", "./entrypoint.sh"]
+    entrypoint: ['/bin/sh', '-c', './entrypoint.sh']
     restart: always
     volumes:
       - ./:/app
