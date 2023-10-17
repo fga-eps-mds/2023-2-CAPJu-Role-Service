@@ -1,4 +1,4 @@
 #!/bin/sh
-npm run migration
-npm run seed
+npm run migration --silent
+npm run seed --silent
 npm run start
