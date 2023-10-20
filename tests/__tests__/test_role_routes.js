@@ -8,7 +8,7 @@ const resMock = {
   json: jest.fn(),
 };
 
-describe("role endpoints", () => {
+describe('role endpoints', () => {
   let roleController;
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe("role endpoints", () => {
     jest.clearAllMocks();
   });
 
-  test("index - list all roles (200)", async () => {
+  test('index - list all roles (200)', async () => {
     roleController.roleService.findAll = jest.fn().mockResolvedValue([]);
 
     await roleController.index(reqMock, resMock);
@@ -28,17 +28,17 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("index - return message (204)", async () => {
+  test('index - return message (204)', async () => {
     roleController.roleService.findAll = jest.fn().mockResolvedValue(false);
 
     await roleController.index(reqMock, resMock);
 
-    expect(resMock.json).toHaveBeenCalledWith({ message: "Não Existe cargo" });
+    expect(resMock.json).toHaveBeenCalledWith({ message: 'Não Existe cargo' });
     expect(resMock.status).toHaveBeenCalledWith(204);
   });
 
-  test("index - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('index - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
     roleController.roleService.findAll = jest.fn().mockRejectedValue(error);
 
     await roleController.index(reqMock, resMock);
@@ -46,8 +46,8 @@ describe("role endpoints", () => {
     expect(resMock.json).toHaveBeenCalledWith(error);
     expect(resMock.status).toHaveBeenCalledWith(500);
   });
-  
-  test("getById - return message (204)", async () => {
+
+  test('getById - return message (204)', async () => {
     roleController.roleService.findOneById = jest.fn().mockResolvedValue(false);
 
     reqMock.params = { id: 1 };
@@ -57,10 +57,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(204);
   });
 
-  test("getById - return message (200)", async () => {
+  test('getById - return message (200)', async () => {
     const role = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
       accessLevel: 1,
       allowedActions: [],
     };
@@ -74,8 +74,8 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("getById - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('getById - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
 
     reqMock.params = { id: 1 };
     roleController.roleService.findOneById = jest.fn().mockRejectedValue(error);
@@ -86,10 +86,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(500);
   });
 
-  test("updateRoleName - return empty role (204)", async () => {
+  test('updateRoleName - return empty role (204)', async () => {
     reqMock.body = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
     };
     roleController.roleService.findOneById = jest.fn().mockResolvedValue(false);
     roleController.roleService.updateRoleName = jest.fn().mockResolvedValue();
@@ -100,10 +100,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(204);
   });
 
-  test("updateRoleName - return updated role (200)", async () => {
+  test('updateRoleName - return updated role (200)', async () => {
     const role = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
       accessLevel: 1,
       allowedActions: [],
       set: jest.fn(),
@@ -123,8 +123,8 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("updateRoleName - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('updateRoleName - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
 
     reqMock.params = { idRole: 1 };
     roleController.roleService.findOneById = jest.fn().mockRejectedValue(error);
@@ -135,8 +135,8 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(500);
   });
 
-  test("updateRoleAllowedActions - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('updateRoleAllowedActions - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
 
     reqMock.params = { idRole: 1 };
     roleController.roleService.findOneById = jest.fn().mockRejectedValue(error);
@@ -147,7 +147,7 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(500);
   });
 
-  test("updateRoleAllowedActions - return empty role ([])", async () => {
+  test('updateRoleAllowedActions - return empty role ([])', async () => {
     reqMock.params = { idRole: 1 };
     reqMock.body = { allowedActions: [] };
     roleController.roleService.findOneById = jest.fn().mockResolvedValue(false);
@@ -159,10 +159,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(204);
   });
 
-  test("updateRoleAllowedActions - return updated role (200)", async () => {
+  test('updateRoleAllowedActions - return updated role (200)', async () => {
     const role = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
       accessLevel: 1,
       allowedActions: [],
       set: jest.fn(),
@@ -180,7 +180,7 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("delete - return not found (404)", async () => {
+  test('delete - return not found (404)', async () => {
     reqMock.body = { idRole: 1 };
     roleController.roleService.findOneById = jest.fn().mockResolvedValue(false);
 
@@ -189,10 +189,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(404);
   });
 
-  test("delete - return destroyed role (200)", async () => {
+  test('delete - return destroyed role (200)', async () => {
     const role = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
       accessLevel: 1,
       allowedActions: [],
       destroy: jest.fn(),
@@ -207,8 +207,8 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("delete - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('delete - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
 
     reqMock.body = { idRole: 1 };
     roleController.roleService.findOneById = jest.fn().mockRejectedValue(error);
@@ -219,10 +219,10 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(500);
   });
 
-  test("store - create Role (200)", async () => {
+  test('store - create Role (200)', async () => {
     const role = {
       idRole: 1,
-      name: "juiz",
+      name: 'juiz',
       accessLevel: 1,
       allowedActions: [],
     };
@@ -235,8 +235,8 @@ describe("role endpoints", () => {
     expect(resMock.status).toHaveBeenCalledWith(200);
   });
 
-  test("store - internal server error (500)", async () => {
-    const error = new Error("Internal Server Error");
+  test('store - internal server error (500)', async () => {
+    const error = new Error('Internal Server Error');
     roleController.roleService.createRole = jest.fn().mockRejectedValue(error);
 
     await roleController.store(reqMock, resMock);
