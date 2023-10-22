@@ -22,10 +22,7 @@ class RoleService {
   }
 
   async updateRole(params, idRole) {
-    const [updatedRows] = await this.role.update(
-      params,
-      { where: { idRole } },
-    );
+    const [updatedRows] = await this.role.update(params, { where: { idRole } });
     if (updatedRows) {
       const updatedRole = await this.findOneById(idRole);
       return updatedRole;
