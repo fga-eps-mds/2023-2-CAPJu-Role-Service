@@ -4,7 +4,6 @@ on:
     branches: [main, develop]
     tags:
       - 'v*'
-
 jobs:
   generate-release-service:
     runs-on: ubuntu-latest
@@ -32,6 +31,6 @@ jobs:
           cp -R fga-eps-mds*.json doc/analytics-raw-data
           cd doc
           git add .
-          git commit -m "Métricas SonarCloud Geral Services- ${{ github.event.repository.name }} ${{ github.ref_name }}"
+          git commit -m "Métricas SonarCloud - ${{ github.event.repository.name }} ${{ github.ref_name }}"
           git push
           echo "Arquivos de métricas gerado com sucesso."
