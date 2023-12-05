@@ -15,7 +15,7 @@ const models = {
   UserAccessLog,
 };
 Object.values(models)
-    .filter(model => typeof model.associate === 'function')
-    .forEach(model => model.associate(models));
+  .filter(model => typeof model.associate === 'function')
+  .forEach(model => model.associate(models));
 
 export default models;
